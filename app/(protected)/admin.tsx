@@ -1,13 +1,13 @@
 import { View, StyleSheet } from 'react-native';
 import { Link, Stack } from 'expo-router';
 
-export default function NotFoundScreen() {
+export default function AdminPage() {
   return (
     <>
-      <Stack.Screen options={{ title: 'Oops! Not Found' }} />
+      <Stack.Screen options={{ title: 'ADMIN' }} />
       <View style={styles.container}>
         <Link href="/" style={styles.button}>
-          Go back to Home screen!
+          ADMIN
         </Link>
       </View>
     </>

@@ -5,6 +5,7 @@ import {
 	Platform,
 	StyleSheet,
 	TextInput,
+	ActivityIndicator,
 	TouchableOpacity
 } from 'react-native';
 import { useAuth } from './context/AuthContext';
@@ -12,9 +13,11 @@ import { useAuth } from './context/AuthContext';
 const Login = () => {
 	const [username, setUsername] = useState("manishdhapse7@gmail.com");
 	const [password, setPassword] = useState("123456");
+	const [Act,setAct] = useState(false);
 	const { onLogin } = useAuth();
 
 	const onSignInPress = async () => {
+		setAct(true);
 		onLogin!(username, password);
 	};
 
@@ -23,7 +26,12 @@ const Login = () => {
 			behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
 			style={styles.container}
 		>
+		
+			{Act ? (
+				<ActivityIndicator size={100} animating={Act} />
+			  ) : null}
 			<Text style={styles.header}>My School App</Text>
+			
 			<TextInput
 				autoCapitalize="none"
 				placeholder="email"
@@ -31,6 +39,7 @@ const Login = () => {
 				onChangeText={setUsername}
 				style={styles.inputField}
 			/>
+			
 			<TextInput
 				placeholder="password"
 				value={password}
@@ -38,7 +47,7 @@ const Login = () => {
 				secureTextEntry
 				style={styles.inputField}
 			/>
-
+			
 			<TouchableOpacity onPress={onSignInPress} style={styles.button}>
 				<Text style={{ color: '#fff' }}>Sign in</Text>
 			</TouchableOpacity>

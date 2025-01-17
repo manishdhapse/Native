@@ -4,60 +4,55 @@ import { Link, Stack } from 'expo-router';
 import { useNavigation } from "@react-navigation/native";
 import { View, Text, ScrollView, ActivityIndicator, StyleSheet, Button, FlatList, TouchableOpacity } from "react-native";
 
-const GetNews = () => {
-  const getnewsData = async () => {
-
-  }
-};
-
 const NewsPage = () => {
   const [post, setPostdata] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
   const navigation = useNavigation();
+
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const res = await axios.get("https://jsonplaceholder.typicode.com/posts")
-        console.log(res.data);
+        const res = await axios.get("https://jsonplaceholder.typicode.com/posts");
         setPostdata(res.data);
         setLoading(false);
       } catch (err) {
-        setError(err.message); // Store error message
+        setError("Failed to load data.");
         setLoading(false);
       }
     };
     fetchData();
   }, []);
 
-
-
   return (
     <>
       <Stack.Screen options={{ title: 'News' }} />
 
-
-      <ScrollView  style={styles.container}>
-        <View style={styles.row}>
-          {post.map((item) => (
-            <View style={styles.col} key={item.id}>
-              <Text style={styles.title}>{item.title}</Text>
-              <Text style={styles.body}>{item.body}</Text>
-              <TouchableOpacity
-                style={styles.button}
-                onPress={() => navigation.navigate("Details", { id: item.id })}
-              >
-                <Text style={styles.buttonText}>View Details</Text>
-              </TouchableOpacity>
-            </View>
-          ))}
-        </View>
-        </ScrollView>
-
-
+      <ScrollView style={styles.container}>
+        {loading ? (
+          <ActivityIndicator animating={loading} size="large" color="#0000ff" />
+        ) : error ? (
+          <Text style={styles.errorText}>{error}</Text> // Display error message if any
+        ) : (
+          <View style={styles.row}>
+            {post.map((item) => (
+              <View style={styles.col} key={item.id}>
+                <Text style={styles.title}>{item.title}</Text>
+                <Text style={styles.body}>{item.body}</Text>
+                <TouchableOpacity
+                  style={styles.button}
+                  onPress={() => navigation.navigate("Details", { id: item.id })}
+                >
+                  <Text style={styles.buttonText}>View Details</Text>
+                </TouchableOpacity>
+              </View>
+            ))}
+          </View>
+        )}
+      </ScrollView>
     </>
   );
-}
+};
 
 const styles = StyleSheet.create({
   container: {
@@ -70,7 +65,7 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
   },
   col: {
-    width: "50%", // 3 columns in a row
+    width: "48%", // Adjusted for better spacing between columns
     backgroundColor: "#f9f9f9",
     marginBottom: 16,
     padding: 10,
@@ -100,6 +95,12 @@ const styles = StyleSheet.create({
   buttonText: {
     color: "#fff",
     fontWeight: "bold",
+  },
+  errorText: {
+    color: "red",
+    textAlign: "center",
+    fontSize: 16,
+    marginTop: 20,
   },
 });
 

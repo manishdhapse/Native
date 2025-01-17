@@ -10,17 +10,9 @@ const Page = () => {
 
 	return (
         <View style={styles.container}>
-        <Text style={styles.title}>Home</Text>
-        <Text style={styles.title}>Role: {authState?.role}</Text>
-        <Button title="Logout" onPress={onLogoutPressed} />
+        
         <View style={styles.separator} />
-        {/* <WithRole role={Role.ADMIN}>
-            <Text>Only visible for admins</Text>
-        </WithRole>
-
-        <WithRole role={Role.USER}>
-            <Text>Only visible for users</Text>
-        </WithRole> */}
+			
     </View>
 );
 };
@@ -29,9 +21,10 @@ export default Page;
 
 const styles = StyleSheet.create({
 	container: {
-		alignItems: 'center',
+	
 		flex: 1,
-		justifyContent: 'center'
+	
+		width: '100%', // Ensures full width
 	},
 	separator: {
 		height: 1,
@@ -41,5 +34,8 @@ const styles = StyleSheet.create({
 	title: {
 		fontSize: 20,
 		fontWeight: 'bold'
-	}
+	},
+	tabContainer: {
+		// width: '100%', // Ensures full width
+	},
 });

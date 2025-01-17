@@ -2,9 +2,11 @@ import { Ionicons } from '@expo/vector-icons';
 import { Drawer } from 'expo-router/drawer';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import { useAuth } from '../context/AuthContext';
-
 const DrawerLayout = () => {
-	const { authState,onLogout } = useAuth();
+	const { authState, onLogout } = useAuth();
+	const onLogoutPressed = () => {
+		onLogout!();
+	};
 
 	return (
 		<GestureHandlerRootView style={{ flex: 1 }}>
@@ -12,6 +14,7 @@ const DrawerLayout = () => {
 				<Drawer.Screen
 					name="index"
 					options={{
+
 						headerTitle: 'Home',
 						drawerLabel: 'Home',
 						drawerIcon: ({ size, color }) => (
@@ -33,6 +36,13 @@ const DrawerLayout = () => {
 					redirect={authState?.authenticated === null}
 				/>
 				<Drawer.Screen
+					name="donate"
+					options={{
+						title: 'Donate',
+						drawerItemStyle: { display: 'none' },
+					}}
+				/>
+				<Drawer.Screen
 					name="admin"
 					options={{
 						headerTitle: 'Admin Area',
@@ -41,25 +51,29 @@ const DrawerLayout = () => {
 							<Ionicons name="cog-outline" size={size} color={color} />
 						)
 					}}
+
 					redirect={authState?.authenticated === null}
 				/>
 
-				{/* Logout option */}
-				{authState?.authenticated && (
-					<Drawer.Screen
-						name="logout"
-						options={{
-							headerTitle: 'Logout',
-							drawerLabel: 'Logout',
-							drawerIcon: ({ size, color }) => (
-								<Ionicons name="log-out-outline" size={size} color={color} />
-							),
-						}}
-						
-					/>
-				)}
+
+
+
+				<Drawer.Screen
+					name="logout"
+					options={{
+						headerTitle: 'Logout',
+						drawerLabel: 'Logout',
+						drawerIcon: ({ size, color }) => (
+							<Ionicons name="log-out-outline" size={size} color={color} />
+						),
+					}}
+
+				/>
+
 			</Drawer>
+
 		</GestureHandlerRootView>
+
 	);
 };
 

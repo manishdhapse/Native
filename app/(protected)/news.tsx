@@ -2,7 +2,7 @@ import axios from "axios";
 import React, { useEffect, useState } from 'react';
 import { Link, Stack } from 'expo-router';
 import { useNavigation } from "@react-navigation/native";
-import { View, Text, ScrollView, ActivityIndicator, StyleSheet, Button, FlatList, TouchableOpacity } from "react-native";
+import { View, Text, ScrollView, ActivityIndicator, StyleSheet, TouchableOpacity } from "react-native";
 
 const NewsPage = () => {
   const [post, setPostdata] = useState([]);
@@ -30,20 +30,20 @@ const NewsPage = () => {
 
       <ScrollView style={styles.container}>
         {loading ? (
-          <ActivityIndicator animating={loading} size="large" color="#0000ff" />
+          <ActivityIndicator animating={loading} size="large" color="#6200ea" />
         ) : error ? (
-          <Text style={styles.errorText}>{error}</Text> // Display error message if any
+          <Text style={styles.errorText}>{error}</Text>
         ) : (
-          <View style={styles.row}>
+          <View style={styles.grid}>
             {post.map((item) => (
-              <View style={styles.col} key={item.id}>
-                <Text style={styles.title}>{item.title}</Text>
-                <Text style={styles.body}>{item.body}</Text>
+              <View style={styles.card} key={item.id}>
+                <Text style={styles.cardTitle}>{item.title}</Text>
+                <Text style={styles.cardBody}>{item.body}</Text>
                 <TouchableOpacity
-                  style={styles.button}
+                  style={styles.cardButton}
                   onPress={() => navigation.navigate("Details", { id: item.id })}
                 >
-                  <Text style={styles.buttonText}>View Details</Text>
+                  <Text style={styles.cardButtonText}>View Details</Text>
                 </TouchableOpacity>
               </View>
             ))}
@@ -57,43 +57,48 @@ const NewsPage = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    backgroundColor: "#f5f5f5",
     padding: 16,
   },
-  row: {
+  grid: {
     flexDirection: "row",
     flexWrap: "wrap", // Allows wrapping to the next line
-    justifyContent: "space-between",
+    justifyContent: "space-evenly", // Space out items evenly
   },
-  col: {
-    width: "48%", // Adjusted for better spacing between columns
-    backgroundColor: "#f9f9f9",
+  card: {
+    width: "48%", // 2 cards per row with space between them
+    backgroundColor: "#ffffff",
     marginBottom: 16,
-    padding: 10,
+    padding: 16,
     borderRadius: 8,
-    elevation: 2, // For shadow on Android
-    shadowColor: "#000", // For shadow on iOS
+    elevation: 3, // Material Design elevation (shadow on Android)
+    shadowColor: "#000", // Shadow on iOS
     shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.2,
-    shadowRadius: 3,
+    shadowOpacity: 0.1,
+    shadowRadius: 4,
   },
-  title: {
-    fontSize: 16,
-    fontWeight: "bold",
+  cardTitle: {
+    fontSize: 18,
+    fontWeight: "600",
     marginBottom: 8,
+    color: "#333333",
   },
-  body: {
+  cardBody: {
     fontSize: 14,
-    color: "#555",
+    color: "#666666",
     marginBottom: 16,
+    lineHeight: 20,
   },
-  button: {
-    backgroundColor: "#007bff",
-    padding: 10,
-    borderRadius: 5,
+  cardButton: {
+    backgroundColor: "#6200ea",
+    paddingVertical: 10,
+    paddingHorizontal: 20,
+    borderRadius: 4,
     alignItems: "center",
+    marginTop: 8,
   },
-  buttonText: {
-    color: "#fff",
+  cardButtonText: {
+    color: "#ffffff",
     fontWeight: "bold",
   },
   errorText: {

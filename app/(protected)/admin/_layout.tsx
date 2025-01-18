@@ -12,7 +12,7 @@ export default function TabLayout() {
           if (route.name === 'Acadamic') iconName = 'school-outline';
           if (route.name === 'Profile') iconName = 'person-outline';
           if (route.name === 'Settings') iconName = 'settings-outline';
-          // if (route.name === 'Donate') iconName = 'settings-outline';
+          
           return <Ionicons name={iconName} size={size} color={color} />;
         },
         tabBarActiveTintColor: 'blue',
@@ -22,7 +22,7 @@ export default function TabLayout() {
       <Tab.Screen name="Acadamic" options={{ headerShown: false }}  component={require('./home').default} />
       <Tab.Screen name="Profile" options={{ headerShown: false }}  component={require('./profile').default} />
       <Tab.Screen name="Settings"  options={{ headerShown: false }}  component={require('./settings').default} />
-      {/* <Tab.Screen name="Donate"  options={{ headerShown: false }}  component={require('./Donate').default} /> */}
+      
     </Tab.Navigator>
   );
 

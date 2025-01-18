@@ -36,17 +36,55 @@ const DrawerLayout = () => {
 					redirect={authState?.authenticated === null}
 				/>
 				<Drawer.Screen
+					name="Details" // Dynamic route for notification details
+					options={{
+						title: 'Details', // Title for the dynamic notification detail
+						drawerItemStyle: { display: 'none' }, // Hide from the drawer menu
+					}}
+					redirect={authState?.authenticated === null}
+				/>
+				<Drawer.Screen
 					name="donate"
 					options={{
 						title: 'Donate',
 						drawerItemStyle: { display: 'none' },
 					}}
+					redirect={authState?.authenticated === null}
+				/>
+
+				<Drawer.Screen
+					name="notification"
+					options={{
+						title: 'Notification',
+						drawerItemStyle: { display: 'none' },
+					}}
+					redirect={authState?.authenticated === null}
+				/>
+					<Drawer.Screen
+					name="NotificationDetails" // Dynamic route for notification details
+					options={{
+						title: 'Notification Details', // Title for the dynamic notification detail
+						drawerItemStyle: { display: 'none' }, // Hide from the drawer menu
+					}}
+					redirect={authState?.authenticated === null}
 				/>
 				<Drawer.Screen
 					name="admin"
 					options={{
 						headerTitle: 'Admin Area',
 						drawerLabel: 'Admin',
+						drawerIcon: ({ size, color }) => (
+							<Ionicons name="cog-outline" size={size} color={color} />
+						)
+					}}
+
+					redirect={authState?.authenticated === null}
+				/>
+								<Drawer.Screen
+					name="calendar"
+					options={{
+						headerTitle: 'calendar Area',
+						drawerLabel: 'Calendar',
 						drawerIcon: ({ size, color }) => (
 							<Ionicons name="cog-outline" size={size} color={color} />
 						)
@@ -67,7 +105,7 @@ const DrawerLayout = () => {
 							<Ionicons name="log-out-outline" size={size} color={color} />
 						),
 					}}
-
+					redirect={authState?.authenticated === null}
 				/>
 
 			</Drawer>

@@ -59,7 +59,7 @@ const styles = StyleSheet.create({
   },
   box: {
     width: '30%',
-    aspectRatio: 1.5,
+    aspectRatio: 1,
     alignItems: 'center',
     justifyContent: 'center',
     marginVertical: 10,
@@ -67,7 +67,7 @@ const styles = StyleSheet.create({
     borderRadius: 8,
     elevation: 2,
     shadowColor: '#000',
-    shadowOffset: { width: 0, height: 2 },
+    shadowOffset: { width: 0, height: 1 },
     shadowOpacity: 0.2,
     shadowRadius: 3,
   },
